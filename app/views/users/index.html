@@ -1,0 +1,33 @@
+<div class="container">
+  <table class="table table-striped">
+    <tr>
+      <h1>Lista de Usuarios</h1>
+    </tr>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Email</th>
+      <th>Fecha de nacimiento</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+ 
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.nombre %></td>
+        <td><%= user.apellido %></td>
+        <td><%= user.email %></td>
+        <td><%= user.fecha_nacimiento %></td>
+        <td><a href="/users/<%= user.id %>">Ver</a></td>
+        <td><a href="/users/<%= user.id %>/edit">Editar</a></td>
+        <td><a data-method='delete' href="/users/<%= user.id %>/">Borrar</a></td>
+        <td><a href="api/users/<%= user.id %>">API Json</a></td>
+      </tr>
+    <% end %>
+  </table>
+  
+  <%= link_to 'Nuevo Usuario', new_user_path%>
+  
+</div>

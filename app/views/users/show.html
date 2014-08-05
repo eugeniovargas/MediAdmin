@@ -1,0 +1,30 @@
+<div class="container">
+  <table class="table table-striped">
+    <tr>
+      <h1>Usuario</h1>
+    </tr>  
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Email</th>
+      <th>Fecha de nacimiento</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <tr>
+      <td><%= @user.nombre %></td>
+      <td><%= @user.apellido %></td>
+      <td><%= @user.email %></td>
+      <td><%= @user.fecha_nacimiento %></td>
+      <td><a href="/users/<%= @user.id %>/edit">Editar</a></td>
+      <td><a data-method='delete' href="/users/<%= @user.id %>/">Borrar</a></td>
+      <td><a href="/api/users/<%= @user.id %>">API Json</a></td>
+    </tr>
+
+
+  </table>
+  <%= link_to 'Atras', users_path %>
+  
+</div>
