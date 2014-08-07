@@ -1,0 +1,2 @@
+class UserKeyValuesController < ApplicationController
+end

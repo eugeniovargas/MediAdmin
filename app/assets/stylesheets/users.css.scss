@@ -1,3 +1,15 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.photo{
+  width: 100px;
+  border-radius: 20px;
+  margin: 10px;
+  webkit-box-shadow: 3px 3px 3px #7C7C7C;
+  box-shadow: 3px 3px 3px #7C7C7C;
+}
+.form-edit{
+  background-color: #eee;
+  border-radius:10px;
+}
