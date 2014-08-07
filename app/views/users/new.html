@@ -1,49 +1,64 @@
-<script>
-$(function () {
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                $('<p/>').text(file.name).appendTo(document.body);
-            });
-        }
-    });
-});
-</script>
-
 <div class="container">
+  <br>
+  <% if flash[:notice] %>
+  <div class="alert alert-info" role="alert"><%= flash[:notice] %></div>
+  <% end %>
+  <div class="row col-md-4 form-edit"> 
 
-<h1> Crear Usuario </h1>
+    <h1> Crear Usuario </h1>
  
-<%= form_for :user, url: users_path do |f| %>
-  <p>
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
-  </p>
+    <%= form_for :user, url: users_path do |f| %>
+      <p>
+        <%= f.label 'Nombre *' %><br>
+        <%= f.text_field :nombre ,class: 'form-control'%>
+      </p>
  
-  <p>
-    <%= f.label :apellido %><br>
-    <%= f.text_field :apellido %>
-  </p>
-  <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </p>
+      <p>
+        <%= f.label 'Apellido *' %><br>
+        <%= f.text_field :apellido ,class: 'form-control'%>
+      </p>
+      <p>
+        <%= f.label 'Email *'%><br>
+        <%= f.text_field :email ,class: 'form-control'%>
+      </p>
  
-  <p>
-    <%= f.label :fecha_nacimiento %><br>
-    <%= f.text_field :fecha_nacimiento %>
-  </p>
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </p>
- 
-  <p>
-    <%= f.submit "Guardar" %>
-  </p>
+      <p>
+        <%= f.label :fecha_nacimiento %><br>
+        <%= f.text_field :fecha_nacimiento ,class: 'form-control', :type => 'Date' %>
+      </p>
+      <p>
+        <%= f.label 'Contraseña *' %><br>
+        <%= f.password_field :password ,class: 'form-control'%>
+      </p>
+      <br>
+      <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo">
+        Agregar Campo Personalizado
+      </button>
+
+      <div id="demo" class="collapse"><br>
+        <p>
+          <%= f.fields_for :user_key_values do |p| %>
+            <%= p.label 'Nombre del Campo' %><br>
+            <%= p.text_field 'key' , name: "kv[key]" %><br><br>
+            <%= p.label 'Valor del Campo' %><br>
+            <%= p.text_field 'value' , name: "kv[value]" %>
+          <% end %>
+        </p>
+      </div>
+       <p>
+         <%= f.fields_for :photos do |p| %><br>
+   
+           <%= p.label 'Subir una Foto:' %><br>
+   
+           <%= p.file_field 'Foto', :multiple => true, name: "photos[photo][]" %><br  >
+         <% end %>
+       </p>
+      <p>
+        <%= link_to 'Atras', users_path , class: 'btn btn-info'%>
+        <%= f.submit 'Guardar' ,class: 'btn btn-success' %>
+      </p>
     
-<% end %>
+    <% end %>
 
-<%= link_to 'Atras', users_path %>
+  <div>
 </div>

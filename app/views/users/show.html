@@ -1,4 +1,7 @@
-<div class="container">
+<div class="container">  <br>
+  <% if flash[:notice] %>
+  <div class="alert alert-info" role="alert"><%= flash[:notice] %></div>
+  <% end %>
   <table class="table table-striped">
     <tr>
       <h1>Usuario</h1>
@@ -18,13 +21,32 @@
       <td><%= @user.apellido %></td>
       <td><%= @user.email %></td>
       <td><%= @user.fecha_nacimiento %></td>
-      <td><a href="/users/<%= @user.id %>/edit">Editar</a></td>
-      <td><a data-method='delete' href="/users/<%= @user.id %>/">Borrar</a></td>
-      <td><a href="/api/v1/users/<%= @user.id %>">API Json</a></td>
+      <td><a class="btn btn-success" href="/users/<%= @user.id %>/edit">Editar</a></td>
+      <td><a class="btn btn-danger" data-method='delete' href="/users/<%= @user.id %>/">Borrar</a></td>
+      <td><a class="btn btn-info" href="/api/v1/users/<%= @user.id %>">API Json</a></td>
     </tr>
-
-
   </table>
-  <%= link_to 'Atras', users_path %>
+
+      <h4>Campos Personalizados:</h4>
+
+      <% if @user.user_key_value.blank? %>
+        <span class="label label-info">El usuario no tiene campos personalizados </span>
+      <% end %>
+      <% @user.user_key_value.each do |u| %>
+        <span><%=u.key %>:</span>
+        <span><%=u.value %></span><br>
+      <% end %>
+      <hr>
+
+      <h4>Fotos subidas por el Usuario:</h4>
+
+      <% if @user.photos.blank? %>
+        <span class="label label-info">El usuario no tiene fotos asociadas </span>
+      <% end %>
+      <% @user.photos.each do |p| %>
+        <img src="<%= p.photo %>" class="photo"/>
+      <% end %>
+  <br><br>
+  <%= link_to 'Atras', users_path, class: 'btn btn-info' %>
   
 </div>

@@ -1,81 +1,65 @@
 <div class="container">
+  <div class="row col-md-4 form-edit"> 
+    <h1> Editar Usuario </h1>
+    <hr>
+    <%= form_for :user, url: user_path(@user), html: { multipart: true }, method: :patch do |f|%>
+    <p>
+      <%= f.label :nombre %><br>
+      <%= f.text_field :nombre ,class: 'form-control'%>
+    </p>
 
-<h1> Editar Usuario </h1>
- 
-<%= form_for :user, url: user_path(@user), method: :patch do |f| %>
-  <p>
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
-  </p>
- 
-  <p>
-    <%= f.label :apellido %><br>
-    <%= f.text_field :apellido %>
-  </p>
-  <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </p>
- 
-  <p>
-    <%= f.label :fecha_nacimiento %><br>
-    <%= f.text_field :fecha_nacimiento %>
-  </p>
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </p>
+    <p>
+      <%= f.label :apellido %><br>
+      <%= f.text_field :apellido ,class: 'form-control'%>
+    </p>
+    <p>
+      <%= f.label :email %><br>
+      <%= f.text_field :email ,class: 'form-control'%>
+    </p>
 
-<!--- WIP ----> 
-  <p>
-    <%= f.label :imagen %><br> WIP
-  </p> 
-   <form id="fileupload" action="/users" method="POST" enctype="multipart/form-data">
-         <!-- Redirect browsers with JavaScript disabled to the origin page -->
-         <noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>
-         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-         <div class="row fileupload-buttonbar">
-             <div class="col-lg-7">
-                 <!-- The fileinput-button span is used to style the file input field as button -->
-                 <span class="btn btn-success fileinput-button">
-                     <i class="glyphicon glyphicon-plus"></i>
-                     <span>Add files...</span>
-                     <input type="file" name="files[]" multiple>
-                 </span>
-                 <button type="submit" class="btn btn-primary start">
-                     <i class="glyphicon glyphicon-upload"></i>
-                     <span>Start upload</span>
-                 </button>
-                 <button type="reset" class="btn btn-warning cancel">
-                     <i class="glyphicon glyphicon-ban-circle"></i>
-                     <span>Cancel upload</span>
-                 </button>
-                 <button type="button" class="btn btn-danger delete">
-                     <i class="glyphicon glyphicon-trash"></i>
-                     <span>Delete</span>
-                 </button>
-                 <input type="checkbox" class="toggle">
-                 <!-- The global file processing state -->
-                 <span class="fileupload-process"></span>
-             </div>
-             <!-- The global progress state -->
-             <div class="col-lg-5 fileupload-progress fade">
-                 <!-- The global progress bar -->
-                 <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                     <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                 </div>
-                 <!-- The extended global progress state -->
-                 <div class="progress-extended">&nbsp;</div>
-             </div>
-         </div>
-         <!-- The table listing the files available for upload/download -->
-         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-   </form>
-   
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-<%= link_to 'Atras', users_path %>
+    <p>
+      <%= f.label :fecha_nacimiento %><br>
+      <%= f.text_field :fecha_nacimiento ,class: 'form-control', :type => 'Date' %>
+    </p>
+    <p>
+      <%= f.label :password %><br>
+      <%= f.password_field :password ,class: 'form-control'%>
+    </p>
+    <p>
+      <%= f.fields_for :user_key_values do |p| %>
+      
+        <%= p.label :campo_personalizado %><br>
+        <%= p.label 'Nombre del Campo' %><br>
+        <%= p.text_field 'key' , name: "kv[key]" %><br><br>
+        <%= p.label 'Valor del Campo' %><br>
+        <%= p.text_field 'value' , name: "kv[value]" %>
+      <% end %>
+      
+    </p>
+    
+    <p>
+      <%= f.fields_for :photos do |p| %>
+      
+        <%= p.label 'Subir una Foto:' %><br>
+      
+        <%= p.file_field 'Foto', :multiple => true, name: "photos[photo][]" %>
+      <% end %>
+    </p>
+    <hr>
+    <p>
+      <%= link_to 'Atras', users_path , class: 'btn btn-info'%>
+      <%= f.submit 'Guardar' ,class: 'btn btn-success' %>
+    </p>
+    <% end %>
+  </div>
+  <div class="row col-md-7 col-md-offset-1"> 
+    <h3>Fotos De <%=@user.nombre %>:</h3><br>
+    
+    <% if @user.photos.blank? %>
+      <span class="label label-info">El usuario no tiene fotos asociadas </span>
+    <% end %>
+    <% @user.photos.each do |p| %>
+      <img src="<%= p.photo %>" class="photo"/>
+    <% end %>
+  </div>
 </div>

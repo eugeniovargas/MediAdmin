@@ -1,4 +1,8 @@
 <div class="container">
+  <br>
+  <% if flash[:notice] %>
+  <div class="alert alert-info" role="alert"><%= flash[:notice] %></div>
+  <% end %>
   <table class="table table-striped">
     <tr>
       <h1>Lista de Usuarios</h1>
@@ -20,14 +24,14 @@
         <td><%= user.apellido %></td>
         <td><%= user.email %></td>
         <td><%= user.fecha_nacimiento %></td>
-        <td><a href="/users/<%= user.id %>">Ver</a></td>
-        <td><a href="/users/<%= user.id %>/edit">Editar</a></td>
-        <td><a data-method='delete' href="/users/<%= user.id %>/">Borrar</a></td>
-        <td><a href="api/v1/users/<%= user.id %>">API Json</a></td>
+        <td><a class="btn btn-default" href="/users/<%= user.id %>">Ver</a></td>
+        <td><a class="btn btn-success" href="/users/<%= user.id %>/edit">Editar</a></td>
+        <td><a class="btn btn-danger" data-method='delete' href="/users/<%= user.id %>/">Borrar</a></td>
+        <td><a class="btn btn-info" href="api/v1/users/<%= user.id %>">API Json</a></td>
       </tr>
     <% end %>
   </table>
   
-  <%= link_to 'Nuevo Usuario', new_user_path%>
+  <%= link_to 'Nuevo Usuario', new_user_path, class: 'btn btn-success'%>
   
 </div>

@@ -5,7 +5,10 @@ MediaAdmin::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   
-  resources :users
+  resources :users do
+    resources :user_key_values, only: [:create]
+    resources :photos, only: [:create]
+  end
   
   namespace :api do
     namespace :v1 do
