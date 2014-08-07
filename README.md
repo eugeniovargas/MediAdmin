@@ -5,7 +5,7 @@ CRUD for users
 
 1. Get all users:
 	- Method: GET
-	- URL: [/api/users]
+	- URL: [/api/v1/users]
 	- response: JSON
 
 	```json
@@ -15,7 +15,6 @@ CRUD for users
 "apellido":"Vargas",
 "email":"hola@hola.cll",
 "fecha_nacimiento":"12/20/20",
-"password":"",
 "created_at":"2014-08-04T20:14:14.514Z",
 "updated_at":"2014-08-04T23:58:18.179Z"
 }
@@ -23,7 +22,7 @@ CRUD for users
 
 2. Get User by ID
 	- Method: GET
-	- URL: [api/users/:ID]
+	- URL: [api/v1/users/:ID]
 	- params:
 		- ID (integer)
 	- response: JSON
@@ -35,7 +34,6 @@ CRUD for users
 "apellido":"Vargas",
 "email":"hola@hola.cll",
 "fecha_nacimiento":"12/20/20",
-"password":"",
 "created_at":"2014-08-04T20:14:14.514Z",
 "updated_at":"2014-08-04T23:58:18.179Z"
 }
@@ -45,7 +43,6 @@ CRUD for users
 "apellido":"Varas",
 "email":"email@email.com",
 "fecha_nacimiento":"20/07/98",
-"password":"1212",
 "created_at":"2014-08-05T00:53:44.091Z",
 "updated_at":"2014-08-05T00:53:44.091Z"
 }]
