@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container custom-theme">
   <div class="row col-md-4 form-edit"> 
     <h1> Editar Usuario </h1>
     <hr>
@@ -25,20 +25,25 @@
       <%= f.label :password %><br>
       <%= f.password_field :password ,class: 'form-control'%>
     </p>
-    <p>
-      <%= f.fields_for :user_key_values do |p| %>
-      
-        <%= p.label :campo_personalizado %><br>
-        <%= p.label 'Nombre del Campo' %><br>
-        <%= p.text_field 'key' , name: "kv[key]" %><br><br>
-        <%= p.label 'Valor del Campo' %><br>
-        <%= p.text_field 'value' , name: "kv[value]" %>
-      <% end %>
-      
-    </p>
+    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo">
+      Agregar Campo Personalizado
+    </button>
+    <div id="demo" class="collapse"><br>
+      <p>
+        <%= f.fields_for :user_key_values do |p| %>
+    
+          <%= p.label :campo_personalizado %><br>
+          <%= p.label 'Nombre del Campo' %><br>
+          <%= p.text_field 'key' , name: "kv[key]" %><br><br>
+          <%= p.label 'Valor del Campo' %><br>
+          <%= p.text_field 'value' , name: "kv[value]" %>
+        <% end %>
+    
+      </p>
+    </div>
     
     <p>
-      <%= f.fields_for :photos do |p| %>
+      <%= f.fields_for :photos do |p| %><br>
       
         <%= p.label 'Subir una Foto:' %><br>
       
@@ -60,6 +65,21 @@
     <% end %>
     <% @user.photos.each do |p| %>
       <img src="<%= p.photo %>" class="photo"/>
+    <% end %>
+    
+    <h3>Campos personalizados:</h3><br>
+    
+    <% if @user.user_key_value.blank? %>
+      <span class="label label-info">El usuario no tiene campos personalizados </span>
+    <% else %>
+      <% @user.user_key_value.each do |u| %>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <span><%=u.key %>:</span>
+          <span><%=u.value %></span><br>
+        </li>
+      </ul>
+      <% end %>
     <% end %>
   </div>
 </div>

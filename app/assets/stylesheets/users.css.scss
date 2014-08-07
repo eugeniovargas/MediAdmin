@@ -1,7 +1,20 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+body{
+  background: url(http://mediastre.am/images/dots.png) 
+  repeat fixed,
+  url(http://mediastre.am/images/bg2.jpg) 
+  repeat-y top center fixed,#151515;
+}
+.table{
+  background-color: #ffffff;
+}
+.custom-theme{
+  background: #eee;
+  padding-bottom: 10px;
+  border-radius: 0 0 10px 10px;
+}
 .photo{
   width: 100px;
   border-radius: 20px;
