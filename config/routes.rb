@@ -7,9 +7,11 @@ MediaAdmin::Application.routes.draw do
   
   resources :users
   
-  get 'api/users' => 'api#index'
-  get 'api/users/:id' => 'api#show'
-  
+  namespace :api do
+    namespace :v1 do
+      resources :users
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
